@@ -1,16 +1,25 @@
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/ms-user
-    username: poc
-    password: poc
+    username: postgres
+    password: postgres
     driver-class-name: org.postgresql.Driver
-
   jpa:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         hbm2ddl:
           auto: update
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 
 server:
   port: 8081
+
+broker:
+  queue:
+    email:
+      name: users.v1.user-created
