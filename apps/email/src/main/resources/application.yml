@@ -11,12 +11,6 @@ spring:
         hbm2ddl:
           auto: update
 
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
-
   mail:
     host: sandbox.smtp.mailtrap.io
     port: 2525
@@ -29,6 +23,20 @@ spring:
         ssl:
           enable: false
 
+  kafka:
+    consumer:
+      enable-auto-commit: true
+      bootstrap-servers: localhost:9092
+      auto-offset-reset: earliest
+      key-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: '*'
+        spring.deserializer.key.delegate.class: org.apache.kafka.common.serialization.StringDeserializer
+        spring.deserializer.value.delegate.class: org.apache.kafka.common.serialization.StringDeserializer
 
 server:
   port: 8082
@@ -37,3 +45,4 @@ broker:
   queue:
     email:
       name: users.v1.user-created
+
